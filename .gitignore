@@ -1,0 +1,14 @@
+target/
+*.class
+*.log
+app.log
+.idea/
+.vscode/
+*.iml
+.DS_Store
+.env
+*.pem
+*.key
+kubeconfig*
+secrets.yaml
+dependency-check-report.*

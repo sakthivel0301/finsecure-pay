@@ -1,0 +1,10 @@
+target
+.git
+.gitignore
+.DS_Store
+app.log
+*.md
+k8s
+monitoring
+scripts
+docs
