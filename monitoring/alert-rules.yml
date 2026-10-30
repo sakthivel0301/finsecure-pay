@@ -1,0 +1,28 @@
+groups:
+  - name: finsecure-alerts
+    rules:
+      - alert: FinSecureHighInvalidTransactionRate
+        expr: sum(rate(finsecure_transactions_total{result="invalid"}[1m])) > 0.5
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "High rate of invalid transactions"
+          description: "Invalid transactions exceed 0.5/sec for 30s (possible fraud or client bug)."
+
+      - alert: FinSecureHigh5xxRate
+        expr: sum(rate(http_server_requests_seconds_count{status=~"5.."}[1m])) > 0.1
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "HTTP 5xx errors detected"
+          description: "Server error rate above 0.1/sec for 30s."
+
+      - alert: FinSecureInstanceDown
+        expr: up{job="finsecure-pay"} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "FinSecure Pay instance is down"

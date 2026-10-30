@@ -1,0 +1,19 @@
+global:
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'YOUR_EMAIL@gmail.com'
+  smtp_auth_username: 'YOUR_EMAIL@gmail.com'
+  # Do NOT commit the app password. Mount it as a file instead (see docker-compose) :
+  smtp_auth_password_file: '/etc/alertmanager/smtp_password'
+  smtp_require_tls: true
+
+route:
+  receiver: email
+  group_wait: 10s
+  group_interval: 1m
+  repeat_interval: 30m
+
+receivers:
+  - name: email
+    email_configs:
+      - to: 'YOUR_EMAIL@gmail.com'
+        send_resolved: true
