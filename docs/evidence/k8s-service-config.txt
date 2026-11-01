@@ -1,0 +1,6 @@
+NAME                        TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)        AGE
+service/finsecure-pay-svc   LoadBalancer   34.118.238.75   34.93.213.234   80:32291/TCP   32m
+
+NAME                         DATA   AGE
+configmap/finsecure-config   2      32m
+configmap/kube-root-ca.crt   1      32m

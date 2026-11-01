@@ -28,7 +28,7 @@ spec:
       containers:
         - name: finsecure-pay
           # Replaced by Jenkins with the real tag (kubectl set image / sed)
-          image: YOUR_DOCKERHUB_USER/finsecure-pay:1.0.0
+          image: sakthivel0301/finsecure-pay:1.0.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
