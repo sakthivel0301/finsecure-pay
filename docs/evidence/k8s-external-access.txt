@@ -1,0 +1,35 @@
+== Service ==
+NAME                TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)        AGE
+finsecure-pay-svc   LoadBalancer   34.118.238.75   34.93.213.234   80:32291/TCP   131m
+
+== Health ==
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100    59    0    59    0     0    304      0 --:--:-- --:--:-- --:--:--   304100    59    0    59    0     0    304      0 --:--:-- --:--:-- --:--:--   304
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sun, 01 Nov 2026 06:07:07 GMT
+
+{"version":"1.0.0","service":"finsecure-pay","status":"UP"}
+== Valid transaction ==
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   128    0    26  100   102    141    555 --:--:-- --:--:-- --:--:--   699
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sun, 01 Nov 2026 06:07:07 GMT
+
+{"valid":true,"errors":[]}
+== Rejected transaction ==
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   162    0    61  100   101    382    632 --:--:-- --:--:-- --:--:--  1018
+HTTP/1.1 400 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sun, 01 Nov 2026 06:07:08 GMT
+Connection: close
+
+{"valid":false,"errors":["amount must be greater than zero"]}
