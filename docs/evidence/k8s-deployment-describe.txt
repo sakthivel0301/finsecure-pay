@@ -48,4 +48,4 @@ NewReplicaSet:   finsecure-pay-68f56c8f96 (2/2 replicas created)
 Events:
   Type    Reason             Age   From                   Message
   ----    ------             ----  ----                   -------
-  Normal  ScalingReplicaSet  32m   deployment-controller  Scaled up replica set finsecure-pay-68f56c8f96 from 0 to 2
+  Normal  ScalingReplicaSet  33m   deployment-controller  Scaled up replica set finsecure-pay-68f56c8f96 from 0 to 2
