@@ -4,6 +4,7 @@ pipeline {
     options {
         timestamps()
         disableConcurrentBuilds()
+        timeout(time: 90, unit: 'MINUTES')
     }
 
     environment {
@@ -12,6 +13,9 @@ pipeline {
         IMAGE_NAME    = 'sakthivel0301/finsecure-pay'
         IMAGE_TAG     = "1.0.${BUILD_NUMBER}"
         K8S_NAMESPACE = 'finsecure'
+        // Secrets come from Jenkins Credentials; Jenkins masks them in the logs
+        NVD_API_KEY   = credentials('nvd-api-key')
+        SONAR_TOKEN   = credentials('sonar-token')
     }
 
     stages {
@@ -34,12 +38,47 @@ pipeline {
             steps { sh 'mvn -B package -DskipTests' }
         }
 
-        // Task 5 will add: SonarCloud, OWASP Dependency-Check, Trivy (see Jenkinsfile.full)
+        stage('Code Quality - SonarCloud') {
+            steps {
+                // Blocks the pipeline if the SonarCloud quality gate fails
+                sh '''
+                  mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:5.0.0.4389:sonar \
+                      -Dsonar.token=$SONAR_TOKEN \
+                      -Dsonar.qualitygate.wait=true
+                '''
+            }
+        }
+
+        stage('Dependency Scan - OWASP') {
+            steps {
+                // Fails the build on CVSS >= 7 (High/Critical), set in pom.xml
+                sh 'mvn -B org.owasp:dependency-check-maven:check'
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'target/dependency-check-report.*', allowEmptyArchive: true
+                }
+            }
+        }
 
         stage('Container Build') {
             steps {
-                // amd64 because the GKE nodes are amd64 and this Mac is arm64
                 sh 'docker buildx build --platform linux/amd64 --load -t $IMAGE_NAME:$IMAGE_TAG .'
+            }
+        }
+
+        stage('Image Scan - Trivy') {
+            steps {
+                sh '''
+                  # Readable report first (never fails), then the gate
+                  trivy image --severity HIGH,CRITICAL --ignore-unfixed --no-progress \
+                      --exit-code 0 $IMAGE_NAME:$IMAGE_TAG | tee trivy-report.txt
+                  trivy image --severity HIGH,CRITICAL --ignore-unfixed --no-progress \
+                      --exit-code 1 --quiet $IMAGE_NAME:$IMAGE_TAG
+                '''
+            }
+            post {
+                always { archiveArtifacts artifacts: 'trivy-report.txt', allowEmptyArchive: true }
             }
         }
 
@@ -84,6 +123,6 @@ pipeline {
 
     post {
         success { echo "Deployed $IMAGE_NAME:$IMAGE_TAG" }
-        failure { echo "Pipeline failed - see the stage that turned red" }
+        failure { echo "Pipeline failed - check the red stage" }
     }
 }
