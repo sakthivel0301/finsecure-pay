@@ -1,6 +1,3 @@
-cd ~/Desktop/NUS-Devops/finsecure-pay
-cp Jenkinsfile Jenkinsfile.full
-cat > Jenkinsfile <<'EOF'
 pipeline {
     agent any
 
