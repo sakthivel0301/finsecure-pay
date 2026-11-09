@@ -1,0 +1,7 @@
+deployment.apps/finsecure-pay 
+REVISION  CHANGE-CAUSE
+1         <none>
+2         build 4 image 1.0.4
+4         build 7 image 1.0.7
+5         build 5 image 1.0.5
+
