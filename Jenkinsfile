@@ -87,7 +87,3 @@ pipeline {
         failure { echo "Pipeline failed - see the stage that turned red" }
     }
 }
-EOF
-git add Jenkinsfile Jenkinsfile.full
-git commit -m "ci: add Jenkins pipeline for build, test, package, image push and k8s deploy"
-git push
