@@ -63,7 +63,7 @@ pipeline {
 
         stage('Container Build') {
             steps {
-                sh 'docker buildx build --platform linux/amd64 --load -t $IMAGE_NAME:$IMAGE_TAG .'
+                sh 'docker buildx build --pull --platform linux/amd64 --load -t $IMAGE_NAME:$IMAGE_TAG .'
             }
         }
 
@@ -122,7 +122,15 @@ pipeline {
     }
 
     post {
-        success { echo "Deployed $IMAGE_NAME:$IMAGE_TAG" }
-        failure { echo "Pipeline failed - check the red stage" }
+        success {
+            emailext subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                     body: "Pipeline succeeded.\nImage: ${env.IMAGE_NAME}:${env.IMAGE_TAG}\n${env.BUILD_URL}",
+                     to: '$DEFAULT_RECIPIENTS'
+        }
+        failure {
+            emailext subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                     body: "Pipeline failed. See the red stage in the console: ${env.BUILD_URL}console",
+                     to: '$DEFAULT_RECIPIENTS'
+        }
     }
 }
