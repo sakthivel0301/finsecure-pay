@@ -1,0 +1,28 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.2)
+
+2026-11-10T22:38:40.589Z  INFO 7 --- [finsecure-pay] [           main] c.finsecure.pay.FinSecurePayApplication  : Starting FinSecurePayApplication v1.0.0 using Java 17.0.21 with PID 7 (/app/app.jar started by app in /app)
+2026-11-10T22:38:40.597Z  INFO 7 --- [finsecure-pay] [           main] c.finsecure.pay.FinSecurePayApplication  : No active profile set, falling back to 1 default profile: "default"
+2026-11-10T22:38:43.936Z  INFO 7 --- [finsecure-pay] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-11-10T22:38:43.958Z  INFO 7 --- [finsecure-pay] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-10T22:38:43.959Z  INFO 7 --- [finsecure-pay] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.27]
+2026-11-10T22:38:44.012Z  INFO 7 --- [finsecure-pay] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 3260 ms
+2026-11-10T22:38:45.496Z  INFO 7 --- [finsecure-pay] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 4 endpoints beneath base path '/actuator'
+2026-11-10T22:38:45.840Z  INFO 7 --- [finsecure-pay] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-11-10T22:38:45.888Z  INFO 7 --- [finsecure-pay] [           main] c.finsecure.pay.FinSecurePayApplication  : Started FinSecurePayApplication in 6.573 seconds (process running for 8.479)
+2026-11-10T22:38:47.630Z  INFO 7 --- [finsecure-pay] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-10T22:38:47.630Z  INFO 7 --- [finsecure-pay] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-10T22:38:47.640Z  INFO 7 --- [finsecure-pay] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2026-11-10T22:40:28.354Z  INFO 7 --- [finsecure-pay] [nio-8080-exec-3] c.f.pay.controller.ValidationController  : Transaction T1 validated OK
+2026-11-10T22:40:28.434Z  WARN 7 --- [finsecure-pay] [nio-8080-exec-6] c.f.pay.controller.ValidationController  : Transaction validation failed: [amount must be greater than zero]
+2026-11-10T22:40:28.452Z  WARN 7 --- [finsecure-pay] [nio-8080-exec-7] c.f.pay.controller.ValidationController  : Transaction validation failed: [fromAccount and toAccount must differ]
+2026-11-10T22:40:28.468Z  WARN 7 --- [finsecure-pay] [nio-8080-exec-5] c.f.pay.controller.ValidationController  : Transaction validation failed: [unsupported currency: JPY]
+2026-11-10T22:40:28.484Z  WARN 7 --- [finsecure-pay] [nio-8080-exec-8] c.f.pay.controller.ValidationController  : Transaction validation failed: [amount exceeds maximum limit of 100000]
+2026-11-10T22:40:28.498Z ERROR 7 --- [finsecure-pay] [nio-8080-exec-9] c.f.pay.controller.ValidationController  : Simulated error for alert testing
