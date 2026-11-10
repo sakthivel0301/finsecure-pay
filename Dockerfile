@@ -7,7 +7,7 @@ COPY src ./src
 RUN mvn -B -q package -DskipTests
 
 # ---------- Stage 2: runtime (small, non-root) ----------
-FROM eclipse-temurin:17.0.2_8-jre-focal
+FROM eclipse-temurin:17-jre
 RUN groupadd --system app && useradd --system --gid app --no-create-home app
 WORKDIR /app
 COPY --from=build /app/target/finsecure-pay-*.jar app.jar
