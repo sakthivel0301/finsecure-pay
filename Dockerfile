@@ -8,6 +8,8 @@ RUN mvn -B -q package -DskipTests
 
 # ---------- Stage 2: runtime (small, non-root) ----------
 FROM eclipse-temurin:17-jre
+RUN apt-get update && apt-get install -y --only-upgrade apt libapt-pkg7.0 \
+    && rm -rf /var/lib/apt/lists/*
 RUN groupadd --system app && useradd --system --gid app --no-create-home app
 WORKDIR /app
 COPY --from=build /app/target/finsecure-pay-*.jar app.jar
