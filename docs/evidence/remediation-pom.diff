@@ -1,5 +1,5 @@
 diff --git a/pom.xml b/pom.xml
-index 03dea84..842b21c 100644
+index 344c2e7..eb69c69 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -25,11 +25,6 @@
@@ -12,5 +12,5 @@ index 03dea84..842b21c 100644
 -      <version>2.14.1</version>
 -    </dependency>
  
+ 
      <dependency>
-       <groupId>org.springframework.boot</groupId>
