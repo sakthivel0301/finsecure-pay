@@ -1,0 +1,9 @@
+# HELP finsecure_transactions_total  
+# TYPE finsecure_transactions_total counter
+finsecure_transactions_total{application="finsecure-pay",result="invalid"} 9754.0
+finsecure_transactions_total{application="finsecure-pay",result="valid"} 3451.0
+http_server_requests_seconds_count{application="finsecure-pay",error="none",exception="none",method="GET",outcome="SERVER_ERROR",status="500",uri="/simulate-error"} 1350
+http_server_requests_seconds_count{application="finsecure-pay",error="none",exception="none",method="GET",outcome="SUCCESS",status="200",uri="/actuator/prometheus"} 1504
+http_server_requests_seconds_count{application="finsecure-pay",error="none",exception="none",method="GET",outcome="SUCCESS",status="200",uri="/health"} 2102
+http_server_requests_seconds_count{application="finsecure-pay",error="none",exception="none",method="POST",outcome="CLIENT_ERROR",status="400",uri="/validate"} 9754
+http_server_requests_seconds_count{application="finsecure-pay",error="none",exception="none",method="POST",outcome="SUCCESS",status="200",uri="/validate"} 3451
