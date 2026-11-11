@@ -1,7 +1,0 @@
-PASS  GET /health
-PASS  valid transaction
-PASS  negative amount
-PASS  same accounts
-PASS  bad currency
-PASS  over limit
-Passed: 6  Failed: 0
